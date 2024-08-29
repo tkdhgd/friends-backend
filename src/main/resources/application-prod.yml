@@ -1,0 +1,66 @@
+# 线上配置环境
+# 这个开源时一定不要将这个文件提交，或者不要填写真实配置
+# 别攻击我，谢谢了
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://${MYSQL_HOST:121.196.244.20}:${MYSQL_PORT:3306}/project?serverTimezone=Asia/Shanghai
+    username: ${MYSQL_USER:root}
+    password: ${MYSQL_PASSWORD:study}
+  session:
+    timeout: 86400
+    store-type: redis
+
+  redis:
+    port: ${REDIS_PORT:6379}
+    host: ${REDIS_HOST:121.196.244.20}
+    database: 0
+#
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+    session:
+      cookie:
+#        domain: 121.196.244.20
+#        secure: false
+#        http-only: true
+        domain: arcfindteam.cn
+        secure: true
+#
+#  ssl:
+#    key-password:
+#server:
+#  port: 443
+#  servlet:
+#    context-path: /api
+#  ssl:
+#    key-store: classpath:keystore.p12
+#    key-store-password: mykeystorepassword
+#    key-alias: mykeyalias
+#    key-password: mykeypassword
+    # 如果需要配置信任库
+    # trust-store: classpath:truststore.jks
+    # trust-store-password: mytruststorepassword
+
+
+
+
+
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-field: flag
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+  configuration:
+    map-underscore-to-camel-case: false
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+knife4j:
+  enable: true
+  # 开启生产环境屏蔽
+  production: true
+
+
